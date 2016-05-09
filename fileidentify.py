@@ -2,7 +2,6 @@ import os
 import csv
 import time
 import argparse
-import magic
 
 
 def arg_parser():
