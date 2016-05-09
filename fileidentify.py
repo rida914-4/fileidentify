@@ -2,10 +2,6 @@ import os
 import csv
 import time
 import argparse
-try:
-    import magic
-except:
-    pass
 
 
 def arg_parser():
@@ -49,13 +45,11 @@ def main():
                 for key, value in filetype[hex_content[0:2].upper()].iteritems():
                     if key in hex_content[0:7].upper() or hex_content[0:7].upper() in key and file_num == 0:
                         file_num = 1
-                        chunk.append(os.path.join(path, file_name) + ' : ' + value + ' or ' +
-                                     magic.from_file(os.path.join(path, file_name)).split(',')[0])
+                        chunk.append(os.path.join(path, file_name) + ' : ' + value 
 
             else:
                 file_num = 1
-                chunk.append(os.path.join(path, file_name) + ' : ' +
-                             magic.from_file(os.path.join(path, file_name)).split(',')[0])
+                chunk.append(os.path.join(path, file_name) + ' : Not in the signature database' 
         if chunk:
             f = open('results.txt', 'w')
             chunk = str(chunk).replace(']', '').replace('[', '').replace("'", "").replace(',', '\n')
