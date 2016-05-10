@@ -19,7 +19,7 @@ def folder_handler():
         folder = folder_user[0] + ':\\'
     else:
         folder = folder_user[0].replace(':', ':\\')
-    print 'Identifying files located in folder ' + folder_user + '...'
+    print 'Identifying files located in folder ' + str(folder_user[0]) + ' ...'
     return folder
 
 
