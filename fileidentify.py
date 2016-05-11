@@ -64,9 +64,6 @@ def main():
                     mime_result = all_mime.get(ext).replace('application/', '').replace('x-', '').replace('-program', '')
             except:
                 mime_result = ''
-                continue
-
-
 
             try:
                 with open(file_full) as fi:
