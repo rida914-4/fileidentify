@@ -23,21 +23,6 @@ def folder_handler():
     return folder
 
 
-def mime_finder(file_path):
-    # Method: mime type
-    all_mime = mimetypes.read_mime_types(file_path)  # Loading the mime and type map
-    file_title, ext = os.path.splitext(file_path)
-    if bool(all_mime) is False:
-        return False
-    else:
-        for a in all_mime.items():
-            if a[0] == ext:
-                mime_result = ' or ' + str(a[1]).replace('application/', '').replace('x-', '').replace(
-                    '-program', '')
-                return mime_result
-
-
-
 def file_with_exceptions(exception_list):
     if exception_list:
         return exception_list
@@ -71,19 +56,21 @@ def main():
             mime_result = ''
             file_full = os.path.join(path, file_name)
             file_title, ext = os.path.splitext(file_full)
-            
-            if mime_result is None:
-                mime_result = ''
+
+
             try:
                 all_mime = mimetypes.read_mime_types(file_full)  # Loading the mime and type map
                 if ext in all_mime.keys():
-                    mime_result = all_mime.get(ext)
+                    mime_result = all_mime.get(ext).replace('application/', '').replace('x-', '').replace('-program', '')
             except:
+                mime_result = ''
                 continue
+
+
 
             try:
                 with open(file_full) as fi:
-                    hex_content = fi.read().encode('hex')
+                    hex_content = fi.read(7).encode('hex')
             except IOError as e:
                 exception_list = "".join(file_full)
                 continue
